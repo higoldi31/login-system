@@ -1,0 +1,18 @@
+services:
+ - type: web
+    name: registration
+    runtime: python
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+    startCommand: "gunicorn registration.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "registration.onrender.com,.onrender.com"
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: SECURE_SSL_REDIRECT
+        value: "True"
+ 
